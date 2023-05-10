@@ -1,6 +1,13 @@
 ---
 exclude: .*csv
 repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.79.1
+  hooks:
+  - id: terraform_fmt
+  - id: terraform_tflint
+  - id: terraform_validate
+  - id: tfupdate
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
   hooks:
