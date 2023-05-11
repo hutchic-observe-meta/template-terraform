@@ -1,3 +1,4 @@
 ---
 bug: [bug/*, fix/*]
 feature: [feature/*, feat/*]
+chore: 'chore/*'

@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Generate a token
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.PRIVATE_KEY }}
     - name: Queue
       uses: ahmadnassri/action-workflow-queue@v1.1
     - name: Checkout
@@ -18,4 +24,4 @@ jobs:
     - name: Sync
       uses: ahmadnassri/action-template-repository-sync@v2.3.4
       with:
-        github-token: ${{ secrets.GH_TOKEN }}
+        github-token: ${{ steps.generate_token.outputs.token }}
