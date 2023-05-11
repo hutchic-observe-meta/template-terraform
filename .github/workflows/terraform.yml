@@ -48,27 +48,3 @@ jobs:
       run: terraform plan -no-color
       env:
         TF_VAR_github_token: ${{ steps.generate_token.outputs.token }}
-
-    # Comment with plan on PR
-    - name: Comment with Plan
-      uses: actions/github-script@0.9.0
-      if: github.event_name == 'pull_request'
-      env:
-        STDOUT: "```${{ steps.plan.outputs.stdout }}```"
-      with:
-        github-token: ${{ steps.generate_token.outputs.token }}
-        script: |
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: process.env.STDOUT
-          })
-
-      # On push to main, build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
-      env:
-        TF_VAR_github_token: ${{ steps.generate_token.outputs.token }}
