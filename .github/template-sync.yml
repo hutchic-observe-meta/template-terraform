@@ -13,3 +13,4 @@ files:
 - '!.github/template-sync.yml'
 - '!.github/workflows/pre-commit-update.yml'
 - '!.github/settings.yml'
+- '!*.tf'
