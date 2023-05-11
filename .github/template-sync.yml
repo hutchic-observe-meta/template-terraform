@@ -1,6 +1,6 @@
 ---
 additional:
-- template-terraform
+- tf-github
 
 files:
 - '!README.md'
